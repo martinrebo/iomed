@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { EuiComboBox } from '@elastic/eui';
 import useDataFetch from '../../hooks/useDataFetch';
 import SearchboxUI from './SearchboxUI';
 
@@ -12,11 +11,13 @@ export default function () {
         []
     )
 
-
-
     useEffect(() => {
-        // Format data for the searchbox options
-        let options = data.map((municipio, index) => { return { label: municipio.NOMBRE, id: municipio.CODIGOINE } })
+        // Format data for the searchbox options + Fix code for municipio id
+        let options = data.map((municipio) => { return { 
+            label: municipio.NOMBRE,
+            id: municipio.CODIGOINE.substring(0,5), 
+            codprovincia: municipio.CODPROV,
+            NOMBRE: municipio.NOMBRE } })
         setMunicipios(options)
     }, [data])
 
