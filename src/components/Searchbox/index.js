@@ -17,7 +17,7 @@ export default function () {
             label: municipio.NOMBRE,
             id: municipio.CODIGOINE.substring(0,5), 
             codprovincia: municipio.CODPROV,
-            NOMBRE: municipio.NOMBRE } })
+            nombre: municipio.NOMBRE } })
         setMunicipios(options)
     }, [data])
 

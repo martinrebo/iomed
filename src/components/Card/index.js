@@ -16,15 +16,18 @@ export default () => {
     )
 
     useEffect(() => {
-        doFetch(`https://www.el-tiempo.net/api/json/v2/provincias/${selection.codprovincia}/municipios/${selection.id}`)
+        if (selection === undefined) {
+            return
+        } else
+        doFetch(`https://www.el-tiempo.net/api/json/v2/provincias/${selection?.codprovincia}/municipios/${selection?.id}`)
     }, [selection, doFetch])
 
 
     return (
         <div>
             <Card
-                title={data?.municipio?.NOMBRE}
-                description={data?.stateSky?.description}
+                title={ isLoading ? " loading... " : data?.municipio?.NOMBRE}
+                description={isLoading ? " loading ... " : data?.stateSky?.description}
                 isLoading={isLoading}
                 isError={isError} />
         </div>
