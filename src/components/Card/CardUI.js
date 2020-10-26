@@ -1,32 +1,34 @@
 
 import React from 'react';
+// import { db } from '../../utils/firebase';
 
 import {
   EuiButton,
   EuiCard,
-  EuiIcon,
-  EuiLink,
   EuiSpacer,
-  EuiText,
 } from '@elastic/eui';
 
-export default ({title, description}) => (
+export default ({ data, onClick, isLoading }) => {
+
+  let temperature = data?.temperatura_actual
+  let rain = data?.lluvia
+  let sky = data?.stateSky?.description
+  let municipio = data?.municipio?.NOMBRE
+
+  let description = `La temperatura actual es de ${temperature}º , el cielo esta ${sky} y la probabilidad de llueva es de ${rain}%`
+
+  return (
     <>
       <EuiCard
-        icon={<EuiIcon size="xxl" type="devToolsApp" />}
-        title={title}
-        description={description}
+        title={data && !isLoading ? municipio : "loading..."}
+        description={data && !isLoading  ? description : '...loading'}
         footer={
           <div>
-            <EuiButton aria-label="Go to Developers Tools">Save</EuiButton>
+            <EuiButton onClick={onClick} aria-label="Save">Save</EuiButton>
             <EuiSpacer size="xs" />
-            <EuiText size="s">
-              <p>
-                Or <EuiLink href="http://google.com">Cancel</EuiLink>
-              </p>
-            </EuiText>
           </div>
         }
       />
     </>
-)
+  )
+}

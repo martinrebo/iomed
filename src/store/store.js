@@ -2,7 +2,7 @@
 import React, {createContext, useReducer} from 'react';
 
 const initialState = {
-    currentSelection: [{ label: "Barcelona", id: "08019", codprovincia: "08", NAME: "Barcelona" }],
+    currentSelection: [{ label: "Barcelona", id_municipio: "08019", cod_provincia: "08" }],
     historicSearches: []
 };
 const store = createContext(initialState);

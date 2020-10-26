@@ -2,9 +2,11 @@ import React, { useContext, useEffect } from 'react'
 import useDataFetch from '../../hooks/useDataFetch';
 import Card from './CardUI';
 import { store } from '../../store/store'
+import { firestore } from '../../utils/firebase'
+import firebase from 'firebase'
 
 
-export default () => {
+export default ({ uid }) => {
     const globalState = useContext(store);
     const { dispatch } = globalState;
 
@@ -19,17 +21,38 @@ export default () => {
         if (selection === undefined) {
             return
         } else
-        doFetch(`https://www.el-tiempo.net/api/json/v2/provincias/${selection?.codprovincia}/municipios/${selection?.id}`)
+            doFetch(`https://www.el-tiempo.net/api/json/v2/provincias/${selection?.cod_provincia}/municipios/${selection?.id_municipio}`)
     }, [selection, doFetch])
+
+
+    const handleSaveSearch = () => {
+
+        let cardData = {
+            uid,
+            cod_provincia: selection.cod_provincia,
+            id_municipio: selection.id_municipio,
+            label: selection.label
+        }
+
+
+        try {
+            firestore.collection("users").doc(uid).update({
+                savedSearches: firebase.firestore.FieldValue.arrayUnion(cardData)
+            })
+        } catch (err) {
+            console.log(err)
+
+        }
+    }
 
 
     return (
         <div>
             <Card
-                title={ isLoading ? " loading... " : data?.municipio?.NOMBRE}
-                description={isLoading ? " loading ... " : data?.stateSky?.description}
+               data={data}
                 isLoading={isLoading}
-                isError={isError} />
+                isError={isError}
+                onClick={handleSaveSearch} />
         </div>
     )
 }
