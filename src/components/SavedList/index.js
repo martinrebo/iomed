@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { auth, firestore } from '../../utils/firebase'
 import SavedListUI from './SavedListUI'
+import PropTypes from 'prop-types'
 
 import { store } from '../../store/store'
 
 
-export default ({ uid }) => {
+const SavedList = ({ uid }) => {
 
 
     const globalState = useContext(store);
@@ -51,3 +52,9 @@ export default ({ uid }) => {
         </>
     )
 }
+
+SavedList.propTypes = {
+    uid: PropTypes.string,
+
+}
+export default SavedList;

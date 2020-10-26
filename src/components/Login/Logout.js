@@ -4,7 +4,6 @@ import { auth } from '../../utils/firebase'
 
 import {
     EuiButton,
-    EuiFlexGroup,
     EuiFlexItem,
 } from '@elastic/eui';
 

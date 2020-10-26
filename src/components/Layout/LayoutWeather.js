@@ -1,6 +1,8 @@
 
 import React from 'react';
 
+import PropTypes from 'prop-types'
+
 import {
 
     EuiPage,
@@ -42,3 +44,12 @@ export default function LayoutWeather({ Pagetitle, Searchbox, Card, SearchList, 
         </EuiPage>
     );
 } 
+
+LayoutWeather.propTypes = {   
+        Pagetitle: PropTypes.string,
+        Searchbox: PropTypes.element.isRequired,
+        Card: PropTypes.element.isRequired,
+        SearchList: PropTypes.element.isRequired,
+        Logout: PropTypes.element.isRequired
+
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import {
     EuiListGroup,
@@ -21,4 +22,9 @@ export default function SavedListUI({list, onClick}) {
 
       </EuiListGroup>
     )
+}
+
+SavedListUI.propTypes = {
+  list: PropTypes.array,
+  onClick: PropTypes.func
 }

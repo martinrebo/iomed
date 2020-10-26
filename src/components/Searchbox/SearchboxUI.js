@@ -12,15 +12,18 @@ export default function SearchboxUI({ data, isLoading, isError }) {
     const { dispatch } = globalState;
 
     const [options, setOptions] = useState(data);
+    // eslint-disable-next-line no-unused-vars
+    let searchTimeout; 
+
 
     useEffect(() => {
         setOptions(data)
-    }, [])
+    }, [data])
 
 
     const [selectedOption, setSelectedOption] = useState([])
     const [loadingOptions, setLoadingOptions] = useState(false);
-    let searchTimeout;
+
 
     const onChange = (newOption) => {
         console.log("onChange", newOption)
@@ -34,8 +37,10 @@ export default function SearchboxUI({ data, isLoading, isError }) {
 
     const onSearchChange = (textQuery) => {
         setLoadingOptions(true);
-        
-        searchTimeout = setTimeout(() => {
+
+
+
+         searchTimeout = setTimeout(() => {
             // Simulate a remotely-executed search.
             setLoadingOptions(false);
             setOptions(

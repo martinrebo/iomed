@@ -1,5 +1,6 @@
 
 import React from 'react';
+import PropTypes from 'prop-types'
 
 import {
 
@@ -33,3 +34,8 @@ export default function LayoutHome ({ Pagetitle, Login }) {
     )
 
 };
+
+LayoutHome.propTypes = {
+        Pagetitle: PropTypes.string,
+        Login: PropTypes.element.isRequired,        
+}

@@ -1,20 +1,19 @@
 import React, { useContext, useEffect } from 'react'
 import useDataFetch from '../../hooks/useDataFetch';
-import Card from './CardUI';
+import CardUI from './CardUI';
 import { store } from '../../store/store'
 import { firestore } from '../../utils/firebase'
 import firebase from 'firebase'
+import PropTypes from 'prop-types'
 
-
-export default ({ uid }) => {
+const Card = ({ uid }) => {
     const globalState = useContext(store);
-    const { dispatch } = globalState;
 
     let selection = globalState.state.currentSelection[0]
 
     const [{ data, isLoading, isError }, doFetch] = useDataFetch(
         ``,
-        []
+        {}
     )
 
     useEffect(() => {
@@ -48,11 +47,19 @@ export default ({ uid }) => {
 
     return (
         <div>
-            <Card
-               data={data}
+            <CardUI
+                data={data}
                 isLoading={isLoading}
                 isError={isError}
                 onClick={handleSaveSearch} />
         </div>
     )
 }
+
+
+Card.propTypes = {
+    uid: PropTypes.string,
+
+}
+
+export default Card;
